@@ -2,7 +2,7 @@ from flask import Flask, g, render_template, flash, redirect, url_for, request
 
 DEBUG = True
 PORT = 8000
-HOST = '24.0.0.0'
+HOST = '0.0.0.0'
 
 import forms
 import models
@@ -59,7 +59,7 @@ def detail_entry(id):
     return render_template('detail.html', entry=entry)
 
 
-@app.route('entries/<int:id>/edit', methods=('GET', 'POST'))
+@app.route('/entries/<int:id>/edit', methods=('GET', 'POST'))
 def edit_entry():
      try:
         entry = models.Add.get(models.Add.id == id)
@@ -80,7 +80,7 @@ def edit_entry():
 
 
 
-@app.route('entries/<int:id>/delete')
+@app.route('/entries/<int:id>/delete')
 def delete_entry():
     try:
         entry = models.Entry.get(models.Entry.entry_id == id)

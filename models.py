@@ -33,10 +33,11 @@ class Entry(Model):
         except IntegrityError:
             raise ValueError("Journal entry already exists.")
 
-
-
-if __name__ == '__main__':
+def initialize():
     DATABASE.connect()
     DATABASE.create_tables([Entry], safe=True)
     DATABASE.close()
+
+if __name__ == '__main__':
+    initialize()
     
