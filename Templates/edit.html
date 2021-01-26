@@ -1,52 +1,31 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>MyJournal</title>
-        <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/site.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div class="site-header">
-                    <a class="logo" href="{{ url_for('index') }}"><i class="material-icons">library_books </i></a><br>
-                    <a href="{{ url_for('register') }}" class="button icon-right" href="new.html"><span>New Entry</span> <i class="material-icons">add</i></a>
-                    <a href="{{ url_for('logout') }}"class="button icon-right"><span>logout</span> <i class="material-icons">add</i></a>
-                    <a href="{{ url_for('login') }}"class="button icon-right"><span>login</span> <i class="material-icons">add</i></a>
-                </div>
-                </div>
-            </div>
-        </header>
-        <section>
-            <div class="container">
-                <div class="edit-entry">
-                    <h2>Edit Entry</h2>
-                    <form method='POST', action=''>
-                        {{ form.hidden_tag() }}
-                        {{ render_edit_field(form.title, add.title) }}
-                        {{ render_edit_field(form.date, add.date.strftime('%Y-%m-%d')) }}
-                        {{ render_edit_field(form.time_spent, add.time_spent) }}
-                        {{ form.learned.label }}
-                        <textarea id="learned" name="learned">{{ add.learned }}</textarea><br>
-                        {{ form.resources.label }}
-                        <textarea id="resources" name="resources">{{ add.resources }}</textarea><br>
-                        <input type="submit" value="Update Entry" class="button">
-                        <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
-                        <a href="{{ url_for('delete_entry', id=add.entry_id) }}" class="button button-secondary">Delete</a>
-                </div>  <a href="#" class="button button-secondary">Cancel</a>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <footer>
-            <div>
-                &copy; MyJournal
-            </div>
-        </footer>
-    </body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="edit-entry">
+        <h2>Edit Entry</h2>
+        <form method='POST' action='' class='form'>
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+                {% if field.name == 'date' %}
+                    <label for="{{ field.name }}">{{ field.label.text }}</label>
+                    <input type="date" id="start" name="date" value="1966-09-08" min="1966-01-01" max="2021-12-31">
+                {% elif field.name == 'title' %}
+                    <label for="{{ field.name }}">{{ field.label.text }}</label>
+                    {{ field(value=entry.title) }}
+                {% elif field.name == 'time_spent' %}
+                    <label for="{{ field.name }}">{{ field.label.text }}</label>
+                    {{ field(value=entry.time_spent) }}
+                {% elif field.name == 'learned' %}
+                    <label for="{{ field.name }}">{{ field.label.text }}</label>
+                    <textarea id="learned" rows="5" name="learned">{{ entry.learned }}</textarea>
+                {% elif field.name == 'resources' %}
+                    <label for="{{ field.name }}">{{ field.label.text }}</label>
+                    <textarea id="resources" rows="5" name="resources">{{ entry.resources }}</textarea>
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Engage" class="button">
+            <a href="{{ url_for('index') }}" class="button button-secondary">Abort</a>
+        </form>
+    </div>
+
+{% endblock %}

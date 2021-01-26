@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>MyJournal</title>
-        <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/site.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div class="site-header">
-                    <a class="logo" href="{{ url_for('index') }}"><i class="material-icons">library_books</i></a>
-                    <a class="button icon-right" href="{{ url_for('new_entry') }}"><span>New Entry</span> <i class="material-icons">add</i></a>
-                    <a class="button icon-right" href="{{ url_for('logout') }}"><span>Logout</span> <i class="material-icons">add</i></a>
-                    <a class="button icon-right" href="{{ url_for('login') }}"><span>Login</span> <i class="material-icons">add</i></a>
-                </div>
-            </div>
-        </header>
-        <section>
-            <div class="container">
-                <div class="entry-list">
-                    {% for entry in entries %}
-                    <article>
-                        <h2><a href="{{url_for('detail',new_entry.id)}}">{{new_entry.title}}</a></h2>
-                        <time datetime="{{add_entry.date}}">{{new_entry.date.strftime("%B %d, %Y"}}</time> <br>
-                    </article>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-        <footer>
-            <div>
-                &copy; MyJournal
-            </div>
-        </footer>
-    </body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+    {% for entry in entries %}
+        <div class="entry-list">
+            <article>
+                <h2><a href="{{ url_for('view_entry', id=entry.entry_id) }}">{{ entry.title }}</a></h2>
+                <time datetime="{{ entry.date }}">{{ entry.date.strftime("%B %d, %Y") }}</time>
+            </article>
+        </div>
+    {% endfor %}
+{% endblock %}

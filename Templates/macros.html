@@ -5,6 +5,8 @@
                 <div class='notifaction error'>{{ error }} </div>
             {% endfor %}
         {% endif %}
+        
+        <label for="{{field.name }}">{{ field.label.text }} </label>
         {{ field(placeholder=field.label.text) }}
     </div>
 {% endmacro %}
