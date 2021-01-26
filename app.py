@@ -10,10 +10,6 @@ import models
 app = Flask(__name__)
 app.secret_key = 'ajjdvdkjvfkjvkfvdhgxsydgsbcyvuvnvvn!'
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-Login_manager.login_view = 'login'
-
 
 @app.before_request
 def before_request():
