@@ -42,7 +42,7 @@ def new_entry():
             title=form.title.data,
             date=form.date.data,
             time_spent=form.date.data,
-            learned=form.learning.data.strip(),
+            learned=form.learned.data.strip(),
             resources=form.resources.data.strip(),
         ).save()
         flash('Journal Added! Thanks!', 'success')

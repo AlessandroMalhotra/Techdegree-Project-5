@@ -29,7 +29,7 @@ class Entry(Model):
                     time_spent=time_spent,
                     learned=learned,
                     resources=resources,
-                )
+                ).save()
         except IntegrityError:
             raise ValueError("Journal entry already exists.")
 
