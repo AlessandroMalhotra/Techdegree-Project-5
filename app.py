@@ -2,7 +2,7 @@ from flask import Flask, g, render_template, flash, redirect, url_for, request
 
 DEBUG = True
 PORT = 8000
-HOST = '0.0.0.0'
+HOST = '127.0.0.1'
 
 import forms
 import models
@@ -36,7 +36,7 @@ def index():
 @app.route('/entries/new', methods=('GET', 'POST'))
 def new_entry():
     """ Adds a entry """
-    form = forms.AddForm()
+    form = forms.EntryForm()
     if form.validate_on_submit():
         models.Entry.create(
             title=form.title.data,
@@ -66,7 +66,7 @@ def edit_entry():
      except models.DoesNotExist:
          abort(404)
      
-     form = forms.AddForm()
+     form = forms.EntryForm()
      if form.validate_on_submit():
         entry.title = form.title.data
         entry.date = form.date.data
