@@ -12,4 +12,4 @@ class EntryForm(Form):
     date = DateField('Publish Year (format YYYY-MM-DD):', format='%Y-%m-%d', validators=[DataRequired()])
     time_spent = IntegerField('Time Spent', validators=[DataRequired()])
     learned = TextAreaField('What did you learn?', validators=[DataRequired()])
-    resources = TextAreaField('Resources to remember', validators=[DataRequired()])
+    resources = TextAreaField('Resources to remember')

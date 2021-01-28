@@ -6,7 +6,7 @@
             {% endfor %}
         {% endif %}
         
-        <label for="{{field.name }}">{{ field.label.text }} </label>
-        {{ field(placeholder=field.label.text) }}
+        <label for="{{ field.name }}">{{ field.label.text }} </label>
+        {{ field(placeholder="") }}
     </div>
 {% endmacro %}

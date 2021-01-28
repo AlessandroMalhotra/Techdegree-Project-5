@@ -1,4 +1,4 @@
-from flask import Flask, g, render_template, flash, redirect, url_for, request
+from flask import Flask, g, render_template, flash, redirect, url_for, request, abort
 
 DEBUG = True
 PORT = 8000
@@ -25,7 +25,7 @@ def after_request(response):
     return response
 
 @app.route('/')
-@app.route('/entries')
+@app.route('/entries/')
 def index():
     """Main Paige with Entries"""
     entries = models.Entry.select().limit(100)
@@ -60,9 +60,9 @@ def detail_entry(id):
 
 
 @app.route('/entries/<int:id>/edit', methods=('GET', 'POST'))
-def edit_entry():
+def edit_entry(id):
      try:
-        entry = models.Entry.get(models.Add.id == id)
+        entry = models.Entry.get(models.Entry.entry_id == id)
      except models.DoesNotExist:
          abort(404)
      
@@ -81,7 +81,7 @@ def edit_entry():
 
 
 @app.route('/entries/<int:id>/delete')
-def delete_entry():
+def delete_entry(id):
     try:
         entry = models.Entry.get(models.Entry.entry_id == id)
         entry.delete_instance()
