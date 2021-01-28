@@ -53,7 +53,7 @@ def new_entry():
 @app.route('/entries/<int:id>')
 def detail_entry(id):
     try:
-        entry = models.Add.get(models.Entry.entry_id == id)
+        entry = models.Entry.get(models.Entry.entry_id == id)
     except models.DoesNotExist:
         abort(404)
     return render_template('detail.html', entry=entry)
@@ -62,7 +62,7 @@ def detail_entry(id):
 @app.route('/entries/<int:id>/edit', methods=('GET', 'POST'))
 def edit_entry():
      try:
-        entry = models.Add.get(models.Add.id == id)
+        entry = models.Entry.get(models.Add.id == id)
      except models.DoesNotExist:
          abort(404)
      
