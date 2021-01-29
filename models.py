@@ -9,7 +9,7 @@ class Entry(Model):
     entry_id = AutoField()
     title = CharField()
     date = DateField(default=datetime.datetime.now)
-    time_spent = IntegerField()
+    time_spent = CharField(max_length=50)
     learned = TextField()
     resources = TextField()
 
