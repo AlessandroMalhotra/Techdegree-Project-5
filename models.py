@@ -22,14 +22,13 @@ class Entry(Model):
     @classmethod
     def create_entry(cls, title, date, time_spent, learned, resources):
         try:
-            with DATABASE.transaction():
-                cls.create(
-                    title=title,
-                    date=date,
-                    time_spent=time_spent,
-                    learned=learned,
-                    resources=resources,
-                ).save()
+            cls.create(
+                title=title,
+                date=date,
+                time_spent=time_spent,
+                learned=learned,
+                resources=resources,
+            ).save()
         except IntegrityError:
             raise ValueError("Journal entry already exists.")
 

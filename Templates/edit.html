@@ -8,7 +8,7 @@
             {% for field in form %}
                 {% if field.name == 'date' %}
                     <label for="{{ field.name }}">{{ field.label.text }}</label>
-                    <input type="date" id="start" name="date" value="1966-09-08" min="1966-01-01" max="2021-12-31">
+                    <input type="date" id="start" name="date" value="{{ entry.date }}" min="1966-01-01" max="2021-12-31">
                 {% elif field.name == 'title' %}
                     <label for="{{ field.name }}">{{ field.label.text }}</label>
                     {{ field(value=entry.title) }}
