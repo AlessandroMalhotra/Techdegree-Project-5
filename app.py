@@ -28,7 +28,7 @@ def after_request(response):
 @app.route('/entries/')
 def index():
     """Main Paige with Entries"""
-    entries = models.Entry.select().limit(100)
+    entries = models.Entry.select().limit(100).order_by(models.Entry.date.asc())
     return render_template('index.html', entries=entries)
 
 
@@ -41,7 +41,7 @@ def new_entry():
         models.Entry.create(
             title=form.title.data,
             date=form.date.data,
-            time_spent=form.date.data,
+            time_spent=form.time_spent.data,
             learned=form.learned.data.strip(),
             resources=form.resources.data.strip(),
         ).save()

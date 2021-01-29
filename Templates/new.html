@@ -10,7 +10,7 @@
 
                 {% if field.name == 'date' %}
                     <label for="{{ field.name }}">{{ field.label.text }}</label>
-                    <input type="date" id="start" name="date" value="1996-12-30" min="1996-12-30" max="2021-01-26">
+                    <input type="date" id="start" name="date"  min="1996-12-30" max="2021-01-26">
                 {% else %}
                     {{ render_field(field) }}
                 {% endif %}
