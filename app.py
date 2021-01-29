@@ -28,7 +28,7 @@ def after_request(response):
 @app.route('/entries/')
 def index():
     """Main Paige with Entries"""
-    entries = models.Entry.select().limit(100).order_by(models.Entry.date.asc())
+    entries = models.Entry.select().limit(100).order_by(models.Entry.date.desc())
     return render_template('index.html', entries=entries)
 
 
